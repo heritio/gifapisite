@@ -18,34 +18,26 @@
         const img = document.querySelector("img");
         const inputField = document.querySelector("input");
         const errormsg = document.querySelector("#error");
-        fetchFn();
-        function fetchFn(){
+        fetchGifFn();
+        async function fetchGifFn(){
             let searchTerm = 'car';
             if(inputField.value == ""){
                searchTerm = 'car';
             }else{
                searchTerm = inputField.value;
             }
-        
-                fetch('https://api.giphy.com/v1/gifs/translate?api_key=qy7p8Oam4tNK3SLGgnZlsVLCbeRpfQy7&s=' + searchTerm,{
-                mode: "cors"})
-                .then(function(response) {
-                    return response.json();
-                })
-                .then(function(res){
-                    console.log(res);
-                    return res;
-                })
-                .then(function(response){
+            const response = await fetch('https://api.giphy.com/v1/gifs/translate?api_key=qy7p8Oam4tNK3SLGgnZlsVLCbeRpfQy7&s=' + searchTerm,{ mode: "cors"});
+                response.json().then(function(response){
                     img.src = response.data.images.original.url;
                 })
                 .catch(function(error){
+                    console.error(error);
                    errormsg.textContent = "There seems to be something wrong, contact helpdesk or try again later";
                    img.src = "/error-icon-28.png";
                 })
         }
 
-        gifbtn.addEventListener("click", fetchFn)
+        gifbtn.addEventListener("click", fetchGifFn)
     </script>
 </body>
 </html>
