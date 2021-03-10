@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Api gyphy</title>
+</head>
+<body>
+    <img src="#" alt="">
+    <input type="text">
+    <button id="gifbtn">New Gif</button>
+    <h1 id="error"></h1>
+    
+    <script>
+        let gifbtn = document.querySelector("#gifbtn");
+        const img = document.querySelector("img");
+        const inputField = document.querySelector("input");
+        const errormsg = document.querySelector("#error");
+        fetchFn();
+        function fetchFn(){
+            let searchTerm = 'car';
+            if(inputField.value == ""){
+               searchTerm = 'car';
+            }else{
+               searchTerm = inputField.value;
+            }
+        
+                fetch('https://api.giphy.com/v1/gifs/translate?api_key=qy7p8Oam4tNK3SLGgnZlsVLCbeRpfQy7&s=' + searchTerm,{
+                mode: "cors"})
+                .then(function(response) {
+                    return response.json();
+                })
+                .then(function(res){
+                    console.log(res);
+                    return res;
+                })
+                .then(function(response){
+                    img.src = response.data.images.original.url;
+                })
+                .catch(function(error){
+                   errormsg.textContent = "There seems to be something wrong, contact helpdesk or try again later";
+                   img.src = "/error-icon-28.png";
+                })
+        }
+
+        gifbtn.addEventListener("click", fetchFn)
+    </script>
+</body>
+</html>

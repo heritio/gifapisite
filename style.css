@@ -1,0 +1,21 @@
+
+body{
+    display: flex;
+    flex-direction: column;
+    width: 70%;
+    margin: auto;
+}
+img{
+    width: 500px;
+    height: 400px;
+    margin: auto;
+}
+button{
+    width: 50%;
+    margin: auto;
+}
+input{
+    width: 30%;
+    height: 20px;
+    margin: 20px auto;
+}
